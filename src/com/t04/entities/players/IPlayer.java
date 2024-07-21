@@ -1,0 +1,51 @@
+package com.t04.entities.players;
+
+import java.util.List;
+import com.t04.entities.projectiles.Projectile;
+import com.t04.entities.projectiles.ProjEnemy;
+import com.t04.entities.enemies.Enemy;
+
+public interface IPlayer {
+	public int getState();
+	public double getX();
+	public double getY();
+	public double getVX();
+	public double getVY();
+	public double getRadius();
+	public double getExplosionStart();
+	public double getExplosionEnd();
+	public long getNextShoot();
+	public void draw(long currentTime);
+	public void up(long delta);
+	public void down(long delta);
+	public void left(long delta);
+	public void right(long delta);
+	public void shoot(List<Projectile> projectiles, long currentTime);
+	public boolean hasNextShoot(long currentTime);
+	public boolean finishedGame();
+	public void verifyInGame();
+	public double distProjectile(ProjEnemy projectile);
+	public double distEnemy(Enemy enemy);
+	public boolean colidedWithEnemy(Enemy enemy);
+	public boolean colidedWithProjectile(ProjEnemy projectile);
+	public void onPlayer();
+	public void offPlayer();
+	public int getScore();
+	public int getLife();
+	public void setScore(int score);
+	public void update(long currentTime); 
+	public void isDamage();
+	public double getDamageStart();
+	public double getDamageEnd();
+	public void setDamageStart(double damageStart);
+	public void setDamageEnd(double damageEnd);
+	public void colisionWithEnemy(long currentTime, Enemy enemy);
+	public void colisionWithProjectile(long currentTime, ProjEnemy projectile);
+	public int getWidth();
+	public double getFinalX();
+	public void drawLife();
+	public void drawScore();
+	public void increaseLife(int life);
+	public boolean needToRevert(long currentTime);
+	public IPlayer revert(long currentTime);
+}
