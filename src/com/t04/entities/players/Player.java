@@ -134,11 +134,11 @@ public class Player implements IPlayer, Explosive{
 		return false;
 	}
 	
-	public boolean needToRevert(long currentTime) {
+	public boolean needToRevert() {
 		return false;
 	}
 	
-	public IPlayer revert(long currentTime) {
+	public IPlayer revert() {
 		return this;
 	}
 	
@@ -219,6 +219,8 @@ public class Player implements IPlayer, Explosive{
 			life = Math.max(0, Math.min(lifeMax, getLife()));
 			if(getLife() <= 0) {
 				exploded(currentTime);
+				score = 0;
+				life = getLifeMAX();
 			}
 			else {
 				damageded(currentTime);
@@ -232,6 +234,8 @@ public class Player implements IPlayer, Explosive{
 			life = Math.max(0, Math.min(lifeMax, getLife()));
 			if(getLife() <= 0) {
 				exploded(currentTime);
+				score = 0;
+				life = getLifeMAX();
 			}
 			else {
 				damageded(currentTime);

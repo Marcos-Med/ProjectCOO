@@ -46,6 +46,6 @@ public interface IPlayer {
 	public void drawLife();
 	public void drawScore();
 	public void increaseLife(int life);
-	public boolean needToRevert(long currentTime);
-	public IPlayer revert(long currentTime);
+	public boolean needToRevert();
+	public IPlayer revert();
 }

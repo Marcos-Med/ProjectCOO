@@ -158,6 +158,7 @@ public abstract class Enemy {
 		if(getState() == Main.EXPLODING) {
 			if(currentTime > getExplosionEnd()) {
 				offState();
+				p.setScore(p.getScore() + getScore());
 			}
 		}
 		if(getState() == Main.ACTIVE) {

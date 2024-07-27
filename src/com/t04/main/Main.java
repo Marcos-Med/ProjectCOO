@@ -14,7 +14,7 @@ public class Main {
 	public static final int DAMAGE = 3;
 	public static final int SHIELD_DAMAGE = 4;
 	
-	public static void busyWait(long time) {
+	public static void busyWait(long time) { 
 		while(System.currentTimeMillis() < time) Thread.yield();
 	}
 	
@@ -122,6 +122,7 @@ public class Main {
 			}
 			
 			player.update(currentTime);
+			player = player.revert();
 			
 			if(player.getState() == ACTIVE) {
 				if(GameLib.iskeyPressed(GameLib.KEY_UP)) player.up(delta);

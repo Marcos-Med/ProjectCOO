@@ -18,16 +18,16 @@ public class StarPlayer implements IPlayer, Decorador, Explosive {
 		lastUpdateTime = 0;
 	}
 	
-	public boolean needToRevert(long currentTime) {
-		return currentTime - lastUpdateTime > 20.000;
+	public boolean needToRevert() {
+		return (lastUpdateTime >= 1000) || (getState() == Main.EXPLODING);
 	}
 	
-	public IPlayer revert(long currentTime) {
-		if(needToRevert(currentTime)) {
-			return player.revert(currentTime);
+	public IPlayer revert() {
+		if(needToRevert()) {
+			return player.revert();
 		}
 		else {
-			player = player.revert(currentTime);
+			player = player.revert();
 			return this;
 		}
 	}
@@ -170,6 +170,7 @@ public class StarPlayer implements IPlayer, Decorador, Explosive {
 	}
 	
 	public void update(long currentTime) {
+		lastUpdateTime++;
 		player.update(currentTime);
 	}
 	

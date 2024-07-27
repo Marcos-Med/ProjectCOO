@@ -10,12 +10,12 @@ public class ShieldDisplay extends Display {
 	
 	public void draw(int shieldLife) {
 		shieldLife = Math.max(0, Math.min(getWidth(), shieldLife));
-		GameLib.drawRectangle(finalX, GameLib.HEIGHT * 0.93, getWidth() + 9, 25);
+		GameLib.drawRectangle(finalX + 10, GameLib.HEIGHT * 0.93, getWidth() + 9, 25);
 		GameLib.setColor(Color.CYAN);
 
 		double currentBarWidth = 100 * (shieldLife / 100.0);
 
-		double currentX = (finalX + 5 + getWidth() / 2) - (50 - currentBarWidth) / 2;
+		double currentX = (finalX + 15 + getWidth() / 2) - (50 - currentBarWidth) / 2;
 
 		GameLib.fillRect(currentX, 683, currentBarWidth, 18);
 	}

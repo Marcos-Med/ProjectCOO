@@ -22,7 +22,7 @@ public class EnemyThree extends Enemy {
 	
 	private Upgrade item;
 	public EnemyThree(long currentTime) {
-		super(240, -10.0, 0.6, Math.PI * 3 / 2, 0.0, 15, 12);
+		super(Math.random() * (GameLib.WIDTH - 20.0) + 25, -10.0, 0.3, Math.PI * (3 / 2.0), 0.0, 15, 12);
 		Random number = new Random();
 		type = number.nextInt(3);
 		damageable = false;
@@ -119,9 +119,11 @@ public class EnemyThree extends Enemy {
 			if(damageable) {
 				if (getX() <= radius) {
 					if (getAngle() == Math.PI * 3.0 / 4.0) {
+						System.out.println("Yes");
 						setAngle(Math.PI / 4.0);
 					} else if (getAngle() == Math.PI * 5.0 / 4.0) {
 						setAngle(Math.PI * 7.0 / 4.0);
+						System.out.println("Yes");
 					}
 				} else if (getX() >= GameLib.WIDTH - radius) {
 					if (getAngle() == Math.PI / 4.0) {
@@ -147,9 +149,10 @@ public class EnemyThree extends Enemy {
 					}
 				}
 			}
+			
 		}
-		setX(getX() + getV() * Math.cos(getAngle()) * delta);
-		setY(getY() + getV() * Math.sin(getAngle()) * delta * (-1.0));
+		setX(getX() + (getV() * Math.cos(getAngle()) * delta));
+		setY(getY() + (getV() * Math.sin(getAngle()) * delta * (-1.0)));
 		item.updateForEnemy(getX(), getY());
 	}
 	

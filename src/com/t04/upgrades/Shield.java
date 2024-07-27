@@ -19,7 +19,7 @@ public class Shield implements Upgrade {
 		this.y = y;
 		v = 0.5;
 		state = Main.ACTIVE;
-		shieldLife =50;
+		shieldLife = 10;
 	}
 	
 	public int getState() {
@@ -97,14 +97,19 @@ public class Shield implements Upgrade {
 	}
 	
 	public IPlayer colisionWithPlayer(IPlayer player) {
-		this.state = Main.INACTIVE;
-		if(player instanceof ShieldPlayer) {
-			((ShieldPlayer)player).setShieldLife(shieldLife);
-			return player;
+		if(colidedWithPlayer(player)) {
+			this.state = Main.INACTIVE;
+			if(player instanceof ShieldPlayer) {
+				((ShieldPlayer)player).setShieldLife(shieldLife);
+				return player;
+			}
+			else {
+				IPlayer shield = new ShieldPlayer(player);
+				return shield;
+			}
 		}
 		else {
-			IPlayer shield = new ShieldPlayer(player, shieldLife);
-			return shield;
+			return player;
 		}
 	}
 }

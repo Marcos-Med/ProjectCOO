@@ -92,8 +92,10 @@ public class Heal implements Upgrade {
 	}
 	
 	public IPlayer colisionWithPlayer(IPlayer player) {
-		this.state = Main.INACTIVE;
-		player.increaseLife(heal);
+		if(colidedWithPlayer(player)) {
+			this.state = Main.INACTIVE;
+			player.increaseLife(heal);
+		}
 		return player;
 	}
 }

@@ -87,19 +87,31 @@ public class Star implements Upgrade {
 	}
 	
 	public IPlayer colisionWithPlayer(IPlayer player) {
-		this.state = Main.INACTIVE;
-		if(player instanceof ShieldPlayer) {
-			IPlayer p = ((ShieldPlayer) player).getDecorado();
-			if(!(p instanceof StarPlayer)) {
-				IPlayer q = new StarPlayer(p);
-				player = new ShieldPlayer(q, ((ShieldPlayer) player).getShieldLife());
+		if(colidedWithPlayer(player)) {
+			this.state = Main.INACTIVE;
+			if(player instanceof ShieldPlayer) {
+				IPlayer p = ((ShieldPlayer) player).getDecorado();
+				int lifeShield = ((ShieldPlayer) player).getShieldLife();
+				IPlayer q;
+				if(!(p instanceof StarPlayer)) {
+					q = new StarPlayer(p);
+					player = new ShieldPlayer(q);
+				}
+				else {
+					q = ((StarPlayer) p).getDecorado();
+					IPlayer star = new StarPlayer(q);
+					player = new ShieldPlayer(star);
+				}
+				
+				((ShieldPlayer) player).restoreShieldLife(lifeShield);
 				return player;
 			}
+			else if(!(player instanceof StarPlayer)) {
+				return new StarPlayer(player);
+			}
+			IPlayer p = ((StarPlayer) player).getDecorado();
+			return new StarPlayer(p);
 		}
-		else if(!(player instanceof StarPlayer)) {
-			return new StarPlayer(player);
-		}
-		
 		return player;
 	}
 }

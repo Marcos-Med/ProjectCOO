@@ -20,10 +20,10 @@ public class ShieldPlayer implements IPlayer, Decorador{
 	
 	private static final int lifeShieldMax = 50;
 	
-	public ShieldPlayer(IPlayer player, int shieldLife) {
+	public ShieldPlayer(IPlayer player) {
 		this.player = player;
-		displayShield = new ShieldDisplay(player.getWidth(), player.getFinalX());
-		lifeShield = shieldLife;
+		displayShield = new ShieldDisplay(getWidth(), player.getFinalX());
+		lifeShield = lifeShieldMax;
 		shieldState = Main.ACTIVE;
 		lastUpdateTime = 0;
 		shieldRadius = 20;
@@ -196,16 +196,16 @@ public class ShieldPlayer implements IPlayer, Decorador{
 		player.update(currentTime);
 	}
 	
-	public boolean needToRevert(long currentTime) {
+	public boolean needToRevert() {
 		return getState() == Main.INACTIVE;
 	}
 	
-	public IPlayer revert(long currentTime) {
-		if(needToRevert(currentTime)) {
-			return player.revert(currentTime);
+	public IPlayer revert() {
+		if(needToRevert()) {
+			return player.revert();
 		}
 		else {
-			player = player.revert(currentTime);
+			player = player.revert();
 			return this;
 		}
 	}
@@ -264,16 +264,20 @@ public class ShieldPlayer implements IPlayer, Decorador{
 	}
 	
 	public int getWidth() {
-		return player.getWidth();
+		return lifeShieldMax;
 	}
 	
 	public double getFinalX() {
-		return player.getFinalX();
+		return player.getFinalX() + getWidth() + 9;
 	}
 	
 	public void setShieldLife(int shieldLife) {
 		lifeShield += shieldLife;
 		lifeShield = Math.max(0, Math.min(getShieldMax(), lifeShield));
+	}
+	
+	public void restoreShieldLife(int shieldLife) {
+		lifeShield = shieldLife;
 	}
 	
 	public int getShieldLife() {
